@@ -9,3 +9,16 @@
 /slprj/
 *.autosave
 *.bak
+
+# Simulink cache
+codegen/
+
+# MATLAB preferences
+matlab.prf
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/

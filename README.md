@@ -8,9 +8,8 @@ The project reproduces, as an executable MATLAB script, the final-project assign
 
 > A cantilever tower is shown in Fig. P13.22 with three lumped masses and its flexural stiffness properties: $m = 114{,}750$ kg, $EI/L^3 = 9{,}000{,}000$ N/m, and $EI_t/L^3 = 900$ N/m. Note that the top mass and its supporting element are an appendage to the main tower. Damping is defined by modal damping ratios, with $\zeta_n = 5\%$ for first and third modes and Assume Rayleigh damping.
 >
-> \begin{bmatrix} \1000 \0 \500 \end{bmatrix}
-> 
-> **(a)** Determine the natural vibration periods and modes; sketch** Compues.
+> **(1)** Determine the mass, stiffness and damping matrix.
+> **(2)** Determine the natural vibration periods, damping ratios and modes; sketch Compues.
 > **(b)** Expand the effective earthquake forces into their modal components and show this expansion graphically.
 > **(c)** Compute the modal static responses for three quantities: (i) the displacement of the appendage mass, (ii) the shear force at the base of the appendage, and (iii) the shear force at the base of the tower.
 > **(d)** What can you predict about the relative values of modal contributions to each response quantity from the results of parts (a) and (c)?

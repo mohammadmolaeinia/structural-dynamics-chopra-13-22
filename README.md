@@ -1,4 +1,4 @@
-# Chopra Problem 13.22 — Cantilever Tower Dynamic Analysis
+# Chopra Problem 13.22 | Cantilever Tower Dynamic Analysis
 
 MATLAB implementation of Problem 13.22 from Anil K. Chopra's *Dynamics of Structures*: a three-DOF cantilever tower with an appendage mass, analyzed by classical modal analysis, the Newmark-β step-by-step integration method, and the response-spectrum (modal combination) approach under the El Centro ground motion.
 
@@ -6,8 +6,10 @@ MATLAB implementation of Problem 13.22 from Anil K. Chopra's *Dynamics of Struct
 
 The project reproduces, as an executable MATLAB script, the final-project assignment based on the following problem from Chopra:
 
-> A cantilever tower is shown in Fig. P13.22 with three lumped masses and its flexural stiffness properties: $m = 85{,}000$ kg, $EI/L^3 = 100$ kN/cm, and $EI_t/L^3 = 0.01$ kN/cm. Note that the top mass and its supporting element are an appendage to the main tower. Damping is defined by modal damping ratios, with $\zeta_n = 5\%$ for all modes.
+> A cantilever tower is shown in Fig. P13.22 with three lumped masses and its flexural stiffness properties: $m = 114{,}750$ kg, $EI/L^3 = 9{,}000{,}000$ N/m, and $EI_t/L^3 = 900$ N/m. Note that the top mass and its supporting element are an appendage to the main tower. Damping is defined by modal damping ratios, with $\zeta_n = 5\%$ for first and third modes and Assume Rayleigh damping.
 >
+> \begin{bmatrix} \1000 \0 \500 \end{bmatrix}
+> 
 > **(a)** Determine the natural vibration periods and modes; sketch** Compues.
 > **(b)** Expand the effective earthquake forces into their modal components and show this expansion graphically.
 > **(c)** Compute the modal static responses for three quantities: (i) the displacement of the appendage mass, (ii) the shear force at the base of the appendage, and (iii) the shear force at the base of the tower.

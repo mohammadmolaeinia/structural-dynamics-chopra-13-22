@@ -8,11 +8,41 @@ The project reproduces, as an executable MATLAB script, the final-project assign
 
 > A cantilever tower is shown in Fig. P13.22 with three lumped masses and its flexural stiffness properties: $m = 114{,}750$ kg, $EI/L^3 = 9{,}000{,}000$ N/m, and $EI_t/L^3 = 900$ N/m. Note that the top mass and its supporting element are an appendage to the main tower. Damping is defined by modal damping ratios, with $\zeta_n = 5\%$ for first and third modes and Assume Rayleigh damping.
 >
+> The external load vector consists of two components: spatial and temporal:
+> 
+> $$
+\mathbf{P(x,t)} = 
+\begin{bmatrix}
+1000 \\
+0 \\
+500 
+\end{bmatrix} \mathbf{P(t)}
+$$
+> 
 > **(1)** Determine the mass, stiffness and damping matrix.
+> 
 > **(2)** Determine the natural vibration periods, damping ratios and modes; sketch Compues.
-> **(b)** Expand the effective earthquake forces into their modal components and show this expansion graphically.
-> **(c)** Compute the modal static responses for three quantities: (i) the displacement of the appendage mass, (ii) the shear force at the base of the appendage, and (iii) the shear force at the base of the tower.
-> **(d)** What can you predict about the relative values of modal contributions to each response quantity from the results of parts (a) and (c)?
+> 
+> **(3)** Using modal analysis of the structure subjected to a step load P(t) of magnitude 1 kips, determine:
+>
+>> (a) The time-history response of the roof displacement and interstory drift of the top story, and plot both.
+>>
+>> (b) The time-history response of the base shear and overturning moment of the structure, and plot both.
+>>
+>> (c) Plot the peak story displacement profile and the peak interstory drift profile over the height of the structure.
+>>
+>> (d) Determine the maximum base shear and maximum overturning moment.
+>
+> **(4)** Using modal analysis of the structure subjected to a sinusoidal load P(t) of amplitude 1 kips and frequency equal to the First natural frequency of the structure, determine:
+>> repeat parts (a) through (d) of Section 3
+>
+> **(5)** Using modal analysis of the structure subjected to El Centro ground motion scaled to a peak ground acceleration of 0.65g (with no externally applied load), determine:
+>> repeat parts (a) through (d) of Section 3
+>
+> **(6)** Using spectral analysis of the structure subjected to El Centro ground motion scaled to a peak ground acceleration of 0.65g (with no externally applied load), Compute the El Centro earthquake response spectrum separately for each modal damping ratio, and plot the results and determine:
+>> repeat parts (c) and (d) of Section 3
+>
+> **(7)** Determine the effective modal mass M_n^*​ and the effective modal height h_n^*.
 
 Because the appendage is much lighter and much more flexible than the main tower, this system is a classic illustration of tuning: the first two modes are dominated by the tower, while the third mode is localized almost entirely in the appendage. The script goes beyond parts (a)–(d) of the textbook problem and also runs forced-vibration history analyses (step load, resonant sinusoidal load, and the scaled El Centro record) using the Newmark-β method, plus a response-spectrum analysis with SRSS modal combination.
 
@@ -31,7 +61,14 @@ Because the appendage is much lighter and much more flexible than the main tower
 
 **System matrices.** The user enters the three lumped masses $m_1$, $m_2$, $m_3$ (kg) and the flexural stiffness parameters $k_1$, $k_2$, $k_3$ (N/m). The diagonal mass matrix is $\mathbf{M} = \mathrm{diag}(m_1, m_2, m_3)$. The lateral stiffness matrix is assembled from the cantilever flexibility coefficients of the tower plus the appendage element, then inverted:
 
-$$\mathbf{K} = \begin{bmatrix} \dfrac{1}{3k_1} & \dfrac{5}{6k_1} & \dfrac{4}{3k_1} \\[6pt] \dfrac{5}{6k_1} & \dfrac{8}{3k_1} & \dfrac{14}{3k_1} \\[6pt] \dfrac{4}{3k_1} & \dfrac{14}{3k_1} & \dfrac{26}{3k_1}+\dfrac{1}{3k_3} \end{bmatrix}^{-1}$$
+$$
+\mathbf{K} = 
+\begin{bmatrix}
+\dfrac{1}{3k_1} & \dfrac{5}{6k_1} & \dfrac{4}{3k_1} \\
+\dfrac{5}{6k_1} & \dfrac{8}{3k_1} & \dfrac{14}{3k_1} \\
+\dfrac{4}{3k_1} & \dfrac{14}{3k_1} & \dfrac{26}{3k_1}+\dfrac{1}{3k_3}
+\end{bmatrix}^{-1}
+$$
 
 The flexibility form follows from the unit-load deflections of the two-segment cantilever (main tower stiffness $k_1$, appendage stiffness $k_3$).
 

@@ -43,8 +43,9 @@ $$
 >> repeat parts (c) and (d) of Section 3
 >
 > **(7)** Determine the effective modal mass $M^* _n$ and the effective modal height $h^* _n$.
+>
+> ![Figure of Problem 13.22 from Chopra's textbook](problemFig.png)
 
-![Figure of Problem 13.22 from Chopra's textbook](problemFig.png)
 
 Because the appendage is much lighter and much more flexible than the main tower, this system is a classic illustration of tuning: the first two modes are dominated by the tower, while the third mode is localized almost entirely in the appendage. The script goes beyond parts (1)–(7) by runs forced-vibration history analyses (step load, resonant sinusoidal load, and the scaled El Centro record) using the Newmark-β method, plus a response-spectrum analysis with SRSS modal combination.
 

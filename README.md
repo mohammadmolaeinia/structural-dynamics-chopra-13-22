@@ -6,7 +6,7 @@ MATLAB implementation of Problem 13.22 from Anil K. Chopra's *Dynamics of Struct
 
 The project reproduces, as an executable MATLAB script, the final-project assignment based on the following problem from Chopra:
 
-> A cantilever tower is shown in Fig. P13.22 with three lumped masses and its flexural stiffness properties: $m = 114{,}750$ kg, $EI/L^3 = 9{,}000{,}000$ N/m, and $EI_t/L^3 = 900$ N/m. Note that the top mass and its supporting element are an appendage to the main tower. Damping is defined by modal damping ratios, with $\zeta_n = 5\%$ for first and third modes and Assume Rayleigh damping.
+> A cantilever tower is shown in Fig. P13.22 with three lumped masses and its flexural stiffness properties: $m = 114{,}750$ kg, $EI/L^3 = 9{,}000{,}000$ N/m, and $EI_t/L^3 = 900$ N/m. Note that the top mass and its supporting element are an appendage to the main tower. Damping is defined by modal damping ratios, with $\zeta_n = 5$% for first and third modes and Assume Rayleigh damping.
 >
 > The external load vector consists of two components: spatial and temporal:
 > 
@@ -42,7 +42,7 @@ $$
 > **(6)** Using spectral analysis of the structure subjected to El Centro ground motion scaled to a peak ground acceleration of 0.65g (with no externally applied load), Compute the El Centro earthquake response spectrum separately for each modal damping ratio, and plot the results and determine:
 >> repeat parts (c) and (d) of Section 3
 >
-> **(7)** Determine the effective modal mass M_n^* and the effective modal height h_n^*.
+> **(7)** Determine the effective modal mass $M^* _n$ and the effective modal height $h^* _n$.
 
 ![Figure of Problem 13.22 from Chopra's textbook](problemFig.png)
 
@@ -104,19 +104,25 @@ $$
 
 and the resulting damping ratio in every mode is $\zeta_r = \frac{1}{2}\\left(\alpha/\omega_r + \beta\,\omega_r\right)$.
 
-**Effective modal mass and height.** For each mode, with the influence vector $\boldsymbol{\iota} = [1;\,1;\,1]$ and story heights $\mathbf{h} = [3;\,6;\,9]$ m:
+**Effective modal mass and height.** For each mode, with the influence vector $\boldsymbol{\iota} = [1;\\,1;\\,1]$ and story heights $\mathbf{h} = [3;\\,6;\\,9]$ m:
 
 $$L_n = \boldsymbol{\phi}_n^T\mathbf{M}\boldsymbol{\iota}, \quad M_n = \boldsymbol{\phi}_n^T\mathbf{M}\boldsymbol{\phi}_n, \quad M_n^* = \frac{L_n^2}{M_n}, \quad h_n^* = \frac{\boldsymbol{\phi}_n^T\mathbf{M}\mathbf{h}}{L_n}$$
 
-These quantities support the qualitative prediction of part (d): the tower base shear is dominated by the first mode, whereas the appendage displacement and appendage base shear are dominated by the third (appendage-localized) mode.
+These quantities support the qualitative prediction of part (7): the tower base shear is dominated by the first mode, whereas the appendage displacement and appendage base shear are dominated by the third (appendage-localized) mode.
 
-**Newmark-β time integration (parts 3–5).** The equation $\mathbf{M}\ddot{\mathbf{u}} + \mathbf{C}\dot{\mathbf{u}} + \mathbf{K}\mathbf{u} = \mathbf{p}(t)$ is integrated with the constant-average-acceleration scheme ($\gamma = 0.5$, $\beta = 0.25$, $\Delta t = 0.02$ s) using the effective-stiffness formulation:
+**Newmark-β time integration (parts 3–6).** The equation $\mathbf{M}\ddot{\mathbf{u}} + \mathbf{C}\dot{\mathbf{u}} + \mathbf{K}\mathbf{u} = \mathbf{p}(t)$ is integrated with the constant-average-acceleration scheme ($\gamma = 0.5$, $\beta = 0.25$, $\Delta t = 0.02$ s) using the effective-stiffness formulation:
 
-$$\mathbf{K}_\text{eff} = \mathbf{K} + a_1\mathbf{M} + a_2\mathbf{C}$$
+$$\mathbf{K}_\text{eff} = \mathbf{K} + a_1$$
 
 where
 
-$$a_1 = \frac{1}{\beta\,\Delta t^2}, \quad a_2 = \frac{\gamma}{\beta\,\Delta t}, \quad a_3 = \frac{1}{2\beta}-1, \quad a_4 = \Delta t\!\left(\frac{\gamma}{2\beta}-1\right)$$
+$$a_1 = \frac{1}{\beta\,\Delta t^2} \mathbf{M} + \frac{\gamma}{\beta\,\Delta t} \mathbf{C}, \quad a_2 = \frac{\mathbf{M}}{\beta\,\Delta t} + \frac{\gamma}{\beta\ - 1} \mathbf{C}, \quad a_3 = (\frac{1}{2\beta}-1) \mathbf{M} + (\frac{\gamma}{2\beta}-1) \Delta t \mathbf{C} $$
+
+and
+
+$$\mathbf{P}_\text{eff} = P_\text{i+1} + a_1 q_i + a_2 q'_i + a_3 q"_i $$
+
+$$ \mathbf{P}_\text{eff} = \mathbf{K}_\text{eff} \mathbf{q}_\text{i+1} $$
 
 Three load cases are available:
 
@@ -139,13 +145,13 @@ and similarly for the drifts, base shear, and overturning moment.
 
 ## How to Run
 
-Open and run `chopra_13_22.m` in MATLAB. The script is interactive:
+Open and run `structuralDynamicsChopra13-22.m` in MATLAB. The script is interactive:
 
 1. Enter the masses `M1`, `M2`, `M3` (kg) — e.g. `114750`, `114750`, `114.750`.
 2. Enter the stiffness parameters `K1`, `K2`, `K3` (N/m) — e.g. `9000000`, `9000000`, `900`.
 3. Choose an analysis part:
-   - `3` — step-load history (Newmark-β)
-   - `4` — sinusoidal load at $\omega_1$ (resonance)
+   - `3` — step-load history (modal Newmark-β)
+   - `4` — sinusoidal load at $\omega_1$ (modal Newmark-β _ resonance)
    - `5` — El Centro time-history analysis (modal Newmark-β)
    - `6` — El Centro response-spectrum analysis (SRSS combination)
 4. After the results, enter `0` to end or any other value to run another part.
@@ -154,19 +160,19 @@ Open and run `chopra_13_22.m` in MATLAB. The script is interactive:
 
 **Terminal output:**
 
-- Part 1 — mass matrix $\mathbf{M}$ (kg) and stiffness matrix $\mathbf{K}$ (N/m)
-- Part 2 — damping matrix $\mathbf{C}$, natural periods $T_n$ (s), frequencies $f_n$ (Hz) and $\omega_n$ (rad/s), mode-shape matrix $\boldsymbol{\Phi}$, modal damping ratios $\zeta_n$
+- Part 1 — mass matrix $\mathbf{M}$ (kg), stiffness matrix $\mathbf{K}$ (N/m), damping matrix $\mathbf{C}$
+- Part 2 — natural periods $T_n$ (s), frequencies $f_n$ (Hz) and $\omega_n$ (rad/s), mode-shape matrix $\boldsymbol{\Phi}$, modal damping ratios $\zeta_n$
+- Parts 3, 4, 5 (D) — maximum base shear $V_\text{base}$ (kN) and maximum base overturning moment $M_\text{base}$ (kN·m)
+- Part 6 (C, D) — SRSS-combined maxima of story displacement and drift, and maximum base shear / overturning moment
 - Part 7 — effective modal masses $M_n^*$ (kg) and effective modal heights $h_n^*$ (m)
-- Parts 3–5 — maximum base shear $V_\text{base}$ (kN) and maximum base overturning moment $M_\text{base}$ (kN·m)
-- Part 6 — SRSS-combined maxima of story displacement and drift, and maximum base shear / overturning moment
 
 **Figures generated:**
 
-- The three mode shapes plotted over the story levels
-- Story displacement histories $u_1(t)$, $u_2(t)$, $u_3(t)$ and the top-floor drift history
-- Base shear and base moment histories
-- Maximum story displacement and maximum story drift profiles
-- (Part 6) the El Centro response spectrum $A/\ddot{u}_g$ versus $T_n$
+- part 2 — The three mode shapes plotted over the story levels
+- part 3, 4, 5 (A) — Story displacement histories $u_1(t)$, $u_2(t)$, $u_3(t)$ and the top-floor drift history
+- part 3, 4, 5 (B) — Base shear and base moment histories
+- part 3, 4, 5 (C) — Maximum story displacement and maximum story drift profiles
+- part 6 — the El Centro response spectrum $A/\ddot{u}_g$ versus $T_n$
 
 ## Notes
 

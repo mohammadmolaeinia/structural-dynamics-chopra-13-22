@@ -120,9 +120,15 @@ $$a_1 = \frac{1}{\beta\,\Delta t^2} \mathbf{M} + \frac{\gamma}{\beta\,\Delta t} 
 
 and
 
-$$\mathbf{P}_\text{eff} = P_\text{i+1} + a_1 q_i + a_2 q'_i + a_3 q"_i $$
+$$ \ddot{q}_1 = M^{-1}\bigl(P_0 - C\,\dot{q}_1 - K\,q_1\bigr), \quad \dot{q}_i=0, \quad q_i=0 $$
 
-$$ \mathbf{P}_\text{eff} = \mathbf{K}_\text{eff} \mathbf{q}_\text{i+1} $$
+$$\mathbf{P}_\text{eff} = P_\text{i+1} + a_1 q_i + a_2 \dot{q}_i + a_3 \ddot{q}_i $$
+
+$$ \mathbf{P}_\text{eff} = \mathbf{K}_\text{eff} \mathbf{q}_\text{i+1} \quad  \text{That gives:} \quad \mathbf{q}_\text{i+1}$$
+
+$$ \dot{q}_{i+1} = \frac{\gamma}{\beta \Delta t}\bigl(q_{i+1} - q_i\bigr) + \left(1 - \frac{\gamma}{\beta}\right)\dot{q}_i + \Delta t\left(1 - \frac{\gamma}{2\beta}\right)\ddot{q}_i $$
+
+$$ \ddot{q}_{i+1} = \frac{1}{\beta \Delta t^2}\bigl(q_{i+1} - q_i\bigr) - \frac{1}{\beta \Delta t}\,\dot{q}_i - \left(\frac{1}{2\beta} - 1\right)\ddot{q}_i $$
 
 Three load cases are available:
 
@@ -166,13 +172,48 @@ Open and run `structuralDynamicsChopra13-22.m` in MATLAB. The script is interact
 - Part 6 (C, D) — SRSS-combined maxima of story displacement and drift, and maximum base shear / overturning moment
 - Part 7 — effective modal masses $M_n^*$ (kg) and effective modal heights $h_n^*$ (m)
 
-**Figures generated:**
+**Plots generated:**
 
 - part 2 — The three mode shapes plotted over the story levels
 - part 3, 4, 5 (A) — Story displacement histories $u_1(t)$, $u_2(t)$, $u_3(t)$ and the top-floor drift history
 - part 3, 4, 5 (B) — Base shear and base moment histories
 - part 3, 4, 5 (C) — Maximum story displacement and maximum story drift profiles
 - part 6 — the El Centro response spectrum $A/\ddot{u}_g$ versus $T_n$
+
+## Sample Outputs
+
+### part 2 — The mode shapes
+![Part2 the Mode Shapes](2-theModeShapes.png)
+
+### part 3 (A) — Story displacement and the top-floor drift histories
+![3 A the Story Displacement And Top Floor Drift History](3-A-theStoryDisplacementAndTopFloorDriftHistory.png)
+
+### part 3 (B) — Base shear and base moment histories
+![3 B the V Base And M Base History](3-B-theVBaseAndMBaseHistory.png)
+
+### part 3 (C) — Maximum story displacement and maximum story drift profiles
+![3 C Max Dis And Max Drift](3-C-MaxDisAndMaxDrift.png)
+
+### part 4 (A) — Story displacement and the top-floor drift histories
+![4 A the Story Displacement And Top Floor Drift History](4-A-theStoryDisplacementAndTopFloorDriftHistory.png)
+
+### part 4 (B) — Base shear and base moment histories
+![4 B the V Base And M Base History](4-B-theVBaseAndMBaseHistory.png)
+
+### part 4 (C) — Maximum story displacement and maximum story drift profiles
+![4 C Max Dis And Max Drift](4-C-MaxDisAndMaxDrift.png)
+
+### part 5 (A) — Story displacement and the top-floor drift histories
+![5 A the Story Displacement And Top Floor Drift History](5-A-theStoryDisplacementAndTopFloorDriftHistory.png)
+
+### part 5 (B) — Base shear and base moment histories
+![5 B the V Base And M Base History](5-B-theVBaseAndMBaseHistory.png)
+
+### part 5 (C) — Maximum story displacement and maximum story drift profiles
+![5 C Max Dis And Max Drift](5-C-MaxDisAndMaxDrift.png)
+
+### part 6 — the El Centro response spectrum
+![6 the Response Spectral](6-theResponseSpectral.png)
 
 ## Notes
 

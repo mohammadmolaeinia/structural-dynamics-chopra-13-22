@@ -1,0 +1,31 @@
+A cantilever tower is shown in Fig. P13.22 with three lumped masses and its flexural stiffness properties:
+m = 114,750 kg, EI/L^3 = 9,000,000 N/m, and EI_t/L^3 = 900 N/m.
+Note that the top mass and its supporting element are an appendage to the main tower.
+Damping is defined by modal damping ratios, with zeta_n = 5% for first and third modes and Assume Rayleigh damping.
+The external load vector consists of two components: spatial and temporal:
+P(x,t) = [1000 \\ 0 \\ 500 ] . P(t)
+
+(1) Determine the mass, stiffness and damping matrix.
+
+(2) Determine the natural vibration periods, damping ratios and modes; sketch Compues.
+
+(3) Using modal analysis of the structure subjected to a step load P(t) of magnitude 1 kips, determine:
+  (a) The time-history response of the roof displacement and interstory drift of the top story, and plot both.
+  (b) The time-history response of the base shear and overturning moment of the structure, and plot both.
+  (c) Plot the peak story displacement profile and the peak interstory drift profile over the height of the structure.
+  (d) Determine the maximum base shear and maximum overturning moment.
+
+(4) Using modal analysis of the structure subjected to a sinusoidal load P(t) of amplitude 1 kips and
+frequency equal to the First natural frequency of the structure, determine:
+  repeat parts (a) through (d) of Section 3
+
+(5) Using modal analysis of the structure subjected to El Centro ground motion scaled
+to a peak ground acceleration of 0.65g (with no externally applied load), determine:
+  repeat parts (a) through (d) of Section 3
+
+(6) Using spectral analysis of the structure subjected to El Centro ground motion scaled
+to a peak ground acceleration of 0.65g (with no externally applied load),
+Compute the El Centro earthquake response spectrum separately for each modal damping ratio, and plot the results and determine:
+  repeat parts (c) and (d) of Section 3
+
+(7) Determine the effective modal mass M_n^*​ and the effective modal height h_n^*.

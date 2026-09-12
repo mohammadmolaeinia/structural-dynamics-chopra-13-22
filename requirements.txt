@@ -1,2 +1,2 @@
-- MATLAB R2016b or newer (base MATLAB only; no toolboxes required).
-- `ElCentro.txt` in the working directory (needed for Parts 5 and 6).
+MATLAB R2016b or newer (base MATLAB only; no toolboxes required).
+`ElCentro.txt` in the working directory (needed for Parts 5 and 6).

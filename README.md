@@ -42,7 +42,9 @@ $$
 > **(6)** Using spectral analysis of the structure subjected to El Centro ground motion scaled to a peak ground acceleration of 0.65g (with no externally applied load), Compute the El Centro earthquake response spectrum separately for each modal damping ratio, and plot the results and determine:
 >> repeat parts (c) and (d) of Section 3
 >
-> **(7)** Determine the effective modal mass M_n^*​ and the effective modal height h_n^*.
+> **(7)** Determine the effective modal mass M_n^* and the effective modal height h_n^*.
+
+![Figure of Problem 13.22 from Chopra's textbook](problemFig.png)
 
 Because the appendage is much lighter and much more flexible than the main tower, this system is a classic illustration of tuning: the first two modes are dominated by the tower, while the third mode is localized almost entirely in the appendage. The script goes beyond parts (1)–(7) by runs forced-vibration history analyses (step load, resonant sinusoidal load, and the scaled El Centro record) using the Newmark-β method, plus a response-spectrum analysis with SRSS modal combination.
 
@@ -50,7 +52,22 @@ Because the appendage is much lighter and much more flexible than the main tower
 
 | File | Description |
 |------|-------------|
-| `sample` | sample |
+| `structuralDynamicsChopra13-22.m` | Main MATLAB script: modal analysis, Rayleigh damping, Newmark-β integration, spectral analysis, and plotting |
+| `ElCentro.txt` | Digitized ground acceleration record of the El Centro earthquake |
+| `question.txt` | text version of the assignment |
+| `requirements.txt` | MATLAB dependencies |
+| `problemFig.png` | Figure of Problem 13.22 from Chopra's textbook |
+| `2-theModeShapes.png` | Plot of structural vibration mode shapes |
+| `3-A-theStoryDisplacementAndTopFloorDriftHistory.png` | Story displacement and top-floor drift history — Part 3-A |
+| `3-B-theVBaseAndMBaseHistory.png` | Base shear and base moment history — Part 3-B |
+| `3-C-MaxDisAndMaxDrift.png` | Maximum story displacement and drift — Part 3-C |
+| `4-A-theStoryDisplacementAndTopFloorDriftHistory.png` | Story displacement and top-floor drift history — Part 4-A |
+| `4-B-theVBaseAndMBaseHistory.png` | Base shear and base moment history — Part 4-B |
+| `4-C-MaxDisAndMaxDrift.png` | Maximum story displacement and drift — Part 4-C |
+| `5-A-theStoryDisplacementAndTopFloorDriftHistory.png` | Story displacement and top-floor drift history — Part 5-A |
+| `5-B-theVBaseAndMBaseHistory.png` | Base shear and base moment history — Part 5-B |
+| `5-C-MaxDisAndMaxDrift.png` | Maximum story displacement and drift — Part 5-C |
+| `6-theResponseSpectral.png` | Structural response spectrum — Part 6 |
 
 > Place `ElCentro.txt` in the same folder as the script before running Parts 5 and 6.
 
@@ -69,15 +86,25 @@ $$
 
 The flexibility form follows from the unit-load deflections of the two-segment cantilever (main tower stiffness $k_1$, appendage stiffness $k_3$).
 
-**Modal analysis (part a).** The generalized eigenvalue problem $\mathbf{K}\boldsymbol{\phi} = \omega^2\mathbf{M}\boldsymbol{\phi}$ is solved with `eig(K, M)`. The code reports the natural frequencies $\omega_n$ (rad/s), $f_n = \omega_n/2\pi$ (Hz), the periods $T_n = 1/f_n$ (s), and plots the three mode shapes over the story levels with the base value fixed at zero.
+**Modal analysis.** The generalized eigenvalue problem $\mathbf{K}\boldsymbol{\phi} = \omega^2\mathbf{M}\boldsymbol{\phi}$ is solved with `eig(K, M)`. The code reports the natural frequencies $\omega_n$ (rad/s), $f_n = \omega_n/2\pi$ (Hz), the periods $T_n = 1/f_n$ (s), and plots the three mode shapes over the story levels with the base value fixed at zero.
 
 **Damping (Rayleigh).** With $\zeta_1 = \zeta_3 = 0.05$ specified for the first and third modes, the classical Rayleigh damping coefficients are solved from
 
-$$\begin{bmatrix} 1/\omega_1 & \omega_1 \\ 1/\omega_3 & \omega_3 \end{bmatrix} \begin{bmatrix} \alpha \\ \beta \end{bmatrix} = 2\begin{bmatrix} \zeta_1 \\ \zeta_3 \end{bmatrix}, \qquad \mathbf{C} = \alpha\mathbf{M} + \beta\mathbf{K}$$
+$$
+\begin{bmatrix} 
+1/\omega_1 & \omega_1 \\
+1/\omega_3 & \omega_3
+\end{bmatrix} \begin{bmatrix}
+\alpha \\
+\beta
+\end{bmatrix} = 2\begin{bmatrix}
+\zeta_1 \\
+\zeta_3
+\end{bmatrix}, \qquad \mathbf{C} = \alpha\mathbf{M} + \beta\mathbf{K}$$
 
-and the resulting damping ratio in every mode is $\zeta_r = \frac{1}{2}\!\left(\alpha/\omega_r + \beta\,\omega_r\right)$.
+and the resulting damping ratio in every mode is $\zeta_r = \frac{1}{2}\\left(\alpha/\omega_r + \beta\,\omega_r\right)$.
 
-**Effective modal mass and height (parts b–d).** For each mode, with the influence vector $\boldsymbol{\iota} = [1;\,1;\,1]$ and story heights $\mathbf{h} = [3;\,6;\,9]$ m:
+**Effective modal mass and height.** For each mode, with the influence vector $\boldsymbol{\iota} = [1;\,1;\,1]$ and story heights $\mathbf{h} = [3;\,6;\,9]$ m:
 
 $$L_n = \boldsymbol{\phi}_n^T\mathbf{M}\boldsymbol{\iota}, \quad M_n = \boldsymbol{\phi}_n^T\mathbf{M}\boldsymbol{\phi}_n, \quad M_n^* = \frac{L_n^2}{M_n}, \quad h_n^* = \frac{\boldsymbol{\phi}_n^T\mathbf{M}\mathbf{h}}{L_n}$$
 
